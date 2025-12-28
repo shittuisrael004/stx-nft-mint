@@ -57,6 +57,11 @@
 ;; Read-Only Functions
 ;; -------------------------
 
+;; Returns the total number of NFTs minted
+(define-read-only (get-total-minted)
+  (var-get token-counter)
+)
+
 ;; private functions
 ;;
 
