@@ -3,12 +3,14 @@
 ;; summary: A simple SIP-009 NFT smart contract on Stacks that mints NFTs for a fixed fee, where every NFT shares the same permanent image via a constant metadata URI, and mint fees are withdrawable only by a hard-coded owner wallet.
 ;; description: This contract implements a minimal, secure NFT collection on the Stacks blockchain. Each mint costs 0.01 STX, and all NFTs reference the same immutable metadata and image, ensuring visual consistency across the collection. The contract uses a sequential token ID counter, follows the SIP-009 standard, and includes an owner-only withdrawal function to collect mint proceeds. Designed as an MVP, it is lightweight, auditable, and easy to extend with features like supply caps, whitelists, or royalties.
 
+
 ;; -------------------------
 ;; NFT Definition
 ;; -------------------------
 
 ;; Define a non-fungible token named `sargesmith-nft`
 (define-non-fungible-token sargesmith-nft uint)
+
 
 ;; -------------------------
 ;; Constants
@@ -22,6 +24,7 @@
 
 ;; Static metadata URI (same for every NFT)
 (define-constant TOKEN-URI "ipfs://QmYourMetadataHashHere")
+
 
 ;; -------------------------
 ;; Errors
@@ -80,6 +83,7 @@
   )
 )
 
+
 ;; -------------------------
 ;; Owner Functions
 ;; -------------------------
@@ -101,6 +105,7 @@
     )
   )
 )
+
 
 ;; -------------------------
 ;; Read-Only Functions
