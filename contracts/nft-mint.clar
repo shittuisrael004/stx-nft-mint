@@ -29,6 +29,9 @@
 ;; Error: Not contract owner
 (define-constant ERR-NOT-OWNER u100)
 
+;; Error: STX transfer failed
+(define-constant ERR-STX-TRANSFER u101)
+
 ;; data vars
 ;;
 
