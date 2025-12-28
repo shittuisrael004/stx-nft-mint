@@ -92,6 +92,24 @@
 ;; Owner Functions
 ;; -------------------------
 
+;; Withdraw all STX from the contract (owner only)
+(define-public (withdraw)
+  (begin
+    ;; Ensure caller is contract owner
+    (asserts!
+      (is-eq tx-sender CONTRACT-OWNER)
+      ERR-NOT-OWNER
+    )
+
+    ;; Transfer entire contract balance to owner
+    (stx-transfer?
+      (stx-get-balance (as-contract tx-sender)) ;; Full balance
+      (as-contract tx-sender)                    ;; From contract
+      CONTRACT-OWNER                             ;; To owner
+    )
+  )
+)
+
 ;; -------------------------
 ;; Read-Only Functions
 ;; -------------------------
