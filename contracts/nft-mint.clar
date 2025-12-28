@@ -6,8 +6,12 @@
 ;; traits
 ;;
 
-;; token definitions
-;;
+;; -------------------------
+;; NFT Definition
+;; -------------------------
+
+;; Define a non-fungible token named `sargesmith-nft`
+(define-non-fungible-token sargesmith-nft uint)
 
 ;; -------------------------
 ;; Constants
@@ -34,13 +38,6 @@
 
 ;; Error: Mint failed
 (define-constant ERR-MINT-FAILED u102)
-
-;; -------------------------
-;; NFT Definition
-;; -------------------------
-
-;; Define a non-fungible token named `sargesmith-nft`
-(define-non-fungible-token sargesmith-nft uint)
 
 
 ;; -------------------------
