@@ -1,29 +1,15 @@
-;; title: nft-trait
-;; version:
-;; summary:
-;; description:
+(define-trait nft-trait
+  (
+    ;; Last token ID, limited to uint range
+    (get-last-token-id () (response uint uint))
 
-;; traits
-;;
+    ;; URI for metadata associated with the token
+    (get-token-uri (uint) (response (optional (string-ascii 256)) uint))
 
-;; token definitions
-;;
+     ;; Owner of a given token identifier
+    (get-owner (uint) (response (optional principal) uint))
 
-;; constants
-;;
-
-;; data vars
-;;
-
-;; data maps
-;;
-
-;; public functions
-;;
-
-;; read only functions
-;;
-
-;; private functions
-;;
-
+    ;; Transfer from the sender to a new principal
+    (transfer (uint principal principal) (response bool uint))
+  )
+)
