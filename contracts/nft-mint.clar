@@ -32,6 +32,9 @@
 ;; Error: STX transfer failed
 (define-constant ERR-STX-TRANSFER u101)
 
+;; Error: Mint failed
+(define-constant ERR-MINT-FAILED u102)
+
 ;; -------------------------
 ;; NFT Definition
 ;; -------------------------
@@ -76,11 +79,16 @@
       ERR-STX-TRANSFER
     )
 
-    ;; Mint the NFT to the caller
-    (nft-mint?
-      sargesmith-nft
-      current-id
-      tx-sender
+    ;; Mint the NFT and ensure success
+    (asserts!
+      (is-ok
+        (nft-mint?
+          sargesmith-nft
+          current-id
+          tx-sender
+        )
+      )
+      ERR-MINT-FAILED
     )
 
     ;; Update token counter

@@ -5,6 +5,7 @@ authors = []
 telemetry = false
 cache_dir = './.cache'
 requirements = []
+
 [contracts.nft-mint]
 path = 'contracts/nft-mint.clar'
 clarity_version = 4
