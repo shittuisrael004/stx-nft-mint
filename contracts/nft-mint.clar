@@ -26,6 +26,9 @@
 ;; Errors
 ;; -------------------------
 
+;; Error: Not contract owner
+(define-constant ERR-NOT-OWNER u100)
+
 ;; data vars
 ;;
 
