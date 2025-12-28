@@ -50,8 +50,9 @@
 ;; data maps
 ;;
 
-;; public functions
-;;
+;; -------------------------
+;; Public Functions
+;; -------------------------
 
 ;; -------------------------
 ;; Read-Only Functions
