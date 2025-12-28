@@ -13,6 +13,9 @@
 ;; Constants
 ;; -------------------------
 
+;; owner wallet (CHANGE THIS FOR TESTNET OR MAINNET)
+(define-constant CONTRACT-OWNER 'SPXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+
 ;; data vars
 ;;
 
