@@ -19,6 +19,9 @@
 ;; Mint price: 0.01 STX (1 STX = 1_000_000 microSTX)
 (define-constant MINT-PRICE u10000)
 
+;; Static metadata URI (same for every NFT)
+(define-constant TOKEN-URI "ipfs://QmYourMetadataHashHere")
+
 ;; data vars
 ;;
 
