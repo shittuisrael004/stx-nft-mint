@@ -9,8 +9,9 @@
 ;; token definitions
 ;;
 
-;; constants
-;;
+;; -------------------------
+;; Constants
+;; -------------------------
 
 ;; data vars
 ;;
