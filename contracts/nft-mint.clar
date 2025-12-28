@@ -60,36 +60,25 @@
 ;; Mint a new NFT
 (define-public (mint)
   (let (
-        ;; Get the current token count
-        (current-id (var-get token-counter))
-
-        ;; Increment token ID for next mint
-        (next-id (+ current-id u1))
-       )
+    ;; 1. Get current state
+    (current-id (var-get token-counter))
+    (next-id (+ current-id u1))
+    
+    ;; 2. Capture the minter (current tx-sender)
+    (minter tx-sender)
+    
+    ;; 3. CAPTURE CONTRACT ADDRESS: This resolves the 'unresolved function' error
+    (contract-address (as-contract tx-sender))
+  )
 
     ;; Transfer mint fee from caller to contract
     (asserts!
-      (is-ok
-        (stx-transfer?
-          MINT-PRICE         ;; Amount: 0.01 STX
-          tx-sender          ;; From minter
-          (as-contract tx-sender) ;; To contract
-        )
-      )
+      (is-ok (stx-transfer? MINT-PRICE minter contract-address))
       ERR-STX-TRANSFER
     )
 
     ;; Mint the NFT and ensure success
-    (asserts!
-      (is-ok
-        (nft-mint?
-          sargesmith-nft
-          current-id
-          tx-sender
-        )
-      )
-      ERR-MINT-FAILED
-    )
+    (try! (nft-mint? sargesmith-nft current-id minter))
 
     ;; Update token counter
     (var-set token-counter next-id)
