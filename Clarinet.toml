@@ -5,8 +5,10 @@ authors = []
 telemetry = false
 cache_dir = './.cache'
 requirements = []
+
 [contracts.nft-factory]
 path = 'contracts/nft-factory.clar'
+depends_on = ["nft-trait"]
 clarity_version = 4
 epoch = 'latest'
 
@@ -19,6 +21,7 @@ epoch = 'latest'
 path = 'contracts/nft-trait.clar'
 clarity_version = 4
 epoch = 'latest'
+
 [repl.analysis]
 passes = [
     'call_checker',
