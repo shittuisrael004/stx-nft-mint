@@ -32,6 +32,10 @@
 ;; Error: STX transfer failed
 (define-constant ERR-STX-TRANSFER u101)
 
+;; -------------------------
+;; NFT Definition
+;; -------------------------
+
 ;; data vars
 ;;
 
