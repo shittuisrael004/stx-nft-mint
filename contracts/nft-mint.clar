@@ -14,7 +14,7 @@
 ;; -------------------------
 
 ;; owner wallet (CHANGE THIS FOR TESTNET OR MAINNET)
-(define-constant CONTRACT-OWNER 'SPXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+(define-constant CONTRACT-OWNER 'SP267C6MQJHPR7297033Z8VSKTJM7M62V375BRHHP)
 
 ;; Mint price: 0.01 STX (1 STX = 1_000_000 microSTX)
 (define-constant MINT-PRICE u10000)
