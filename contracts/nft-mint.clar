@@ -36,6 +36,10 @@
 ;; NFT Definition
 ;; -------------------------
 
+;; Define a non-fungible token named `sargesmith-nft`
+(define-non-fungible-token sargesmith-nft uint)
+
+
 ;; data vars
 ;;
 
