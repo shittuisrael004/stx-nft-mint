@@ -50,8 +50,6 @@
 ;; Counter to track token IDs
 (define-data-var token-counter uint u0)
 
-;; data maps
-;;
 
 ;; -------------------------
 ;; Public Functions
