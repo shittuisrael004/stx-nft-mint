@@ -22,6 +22,10 @@
 ;; Static metadata URI (same for every NFT)
 (define-constant TOKEN-URI "ipfs://QmYourMetadataHashHere")
 
+;; -------------------------
+;; Errors
+;; -------------------------
+
 ;; data vars
 ;;
 
