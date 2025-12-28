@@ -53,8 +53,9 @@
 ;; public functions
 ;;
 
-;; read only functions
-;;
+;; -------------------------
+;; Read-Only Functions
+;; -------------------------
 
 ;; private functions
 ;;
