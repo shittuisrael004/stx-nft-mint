@@ -40,8 +40,10 @@
 (define-non-fungible-token sargesmith-nft uint)
 
 
-;; data vars
-;;
+;; -------------------------
+;; Data Storage Vars
+;; -------------------------
+
 
 ;; data maps
 ;;
