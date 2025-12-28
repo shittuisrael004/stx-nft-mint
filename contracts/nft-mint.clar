@@ -1,5 +1,5 @@
 ;; title: SIP-009 nft mint with 0.01 STX fee
-;; version:
+;; version: Clarity 4
 ;; summary:
 ;; description:
 
