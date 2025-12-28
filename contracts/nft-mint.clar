@@ -62,6 +62,12 @@
   (var-get token-counter)
 )
 
+;; Returns the metadata URI for any token ID
+;; (Same URI for all tokens)
+(define-read-only (get-token-uri (token-id uint))
+  (ok TOKEN-URI)
+)
+
 ;; private functions
 ;;
 
