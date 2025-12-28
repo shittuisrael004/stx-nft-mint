@@ -57,19 +57,38 @@
 ;; Mint a new NFT
 (define-public (mint)
   (let (
-    (current-id (var-get token-counter))
-    (next-id (+ current-id u1))
-  )
-    ;; Wrap the transfer in as-contract to target the contract address
+        ;; Get the current token count
+        (current-id (var-get token-counter))
+
+        ;; Increment token ID for next mint
+        (next-id (+ current-id u1))
+       )
+
+    ;; Transfer mint fee from caller to contract
     (asserts!
-      (is-ok (as-contract (stx-transfer? MINT-PRICE tx-sender tx-sender)))
+      (is-ok
+        (stx-transfer?
+          MINT-PRICE         ;; Amount: 0.01 STX
+          tx-sender          ;; From minter
+          (as-contract tx-sender) ;; To contract
+        )
+      )
       ERR-STX-TRANSFER
     )
 
-    (try! (nft-mint? sargesmith-nft current-id tx-sender))
+    ;; Mint the NFT to the caller
+    (nft-mint?
+      sargesmith-nft
+      current-id
+      tx-sender
+    )
+
+    ;; Update token counter
     (var-set token-counter next-id)
+
+    ;; Return minted token ID
     (ok current-id)
-)
+  )
 )
 
 ;; -------------------------
