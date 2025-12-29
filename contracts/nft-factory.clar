@@ -1,6 +1,4 @@
-;; using the SIP009 interface (testnet)
-;; trait configured and deployed from ./settings/Devnet.toml
-;; (impl-trait 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.nft-trait.nft-trait)
+;; using the SIP009 interface
 
 ;; mainnet
 (impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
