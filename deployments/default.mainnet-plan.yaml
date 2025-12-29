@@ -11,7 +11,7 @@ plan:
         - contract-publish:
             contract-name: finaltest-sargesmith-nft
             expected-sender: SP267C6MQJHPR7297033Z8VSKTJM7M62V375BRHHP
-            cost: 2070958
+            cost: 24150
             path: contracts/nft-factory.clar
             anchor-block-only: true
             clarity-version: 4
