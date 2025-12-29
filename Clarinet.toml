@@ -8,7 +8,7 @@ requirements = []
 
 
 
-[contracts.sargesmith-nft]
+[contracts.test-sargesmith-nft]
 path = 'contracts/nft-factory.clar'
 depends_on = ["nft-trait"]
 clarity_version = 4
