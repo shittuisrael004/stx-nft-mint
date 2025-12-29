@@ -63,18 +63,17 @@
 )   
 
 ;; New: Withdraw STX (Only the Owner can do this)
+;; Withdraw function using modern 'as-contract?'
 (define-public (withdraw-stx)
     (let (
         (balance (stx-get-balance current-contract))
     )
-        ;; Check if the person calling is the owner
         (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
         
-        ;; Transfer all STX from contract to owner
-        (stx-transfer? balance current-contract CONTRACT-OWNER)
+        ;; as-contract? returns a response, making it safer
+        (as-contract? (stx-transfer? balance current-contract CONTRACT-OWNER))
     )
 )
-
 ;; SIP009 Transfer
 (define-public (transfer (token-id uint) (sender principal) (recipient principal))
     (begin
