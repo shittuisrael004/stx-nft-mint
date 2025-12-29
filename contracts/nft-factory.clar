@@ -1,6 +1,6 @@
 ;; using the SIP009 interface (testnet)
 ;; trait configured and deployed from ./settings/Devnet.toml
-(impl-trait 'ST267C6MQJHPR7297033Z8VSKTJM7M62V3784NDT5.nft-trait.nft-trait)
+(impl-trait 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.nft-trait.nft-trait)
 
 ;; declare a new NFT
 (define-non-fungible-token sargesmith-nft uint)
@@ -41,7 +41,7 @@
 
 ;; SIP009: Get the token URI. You can set it to any other URI
 (define-read-only (get-token-uri (token-id uint))
-  (ok (some "https://token.stacks.co/{id}.json"))
+  (ok (some "https://ipfs.io/ipfs/bafkreibqqddaatwpnrzldaplcrl56qtinbnhn5mt7s4qkl7ccdykvmvf44"))
 )
 
 ;; Internal - Mint new NFT

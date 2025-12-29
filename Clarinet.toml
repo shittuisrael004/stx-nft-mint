@@ -11,6 +11,12 @@ path = 'contracts/nft-trait.clar'
 clarity_version = 4
 epoch = 'latest'
 
+[contracts.sargesmith-nft]
+path = 'contracts/nft-factory.clar'
+depends_on = ["nft-trait"]
+clarity_version = 4
+epoch = 'latest'
+
 [repl.analysis]
 passes = [
     'call_checker',
