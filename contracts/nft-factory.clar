@@ -1,55 +1,83 @@
-;; using the SIP009 interface
-
-;; mainnet
+;; V1 SargeSmith NFT - Mainnet
 (impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
 
-;; declare a new NFT
-(define-non-fungible-token sargesmith-nft uint)
+;; 1. Traits & Constants
+(define-non-fungible-token sargesmith-nft-v2 uint)
 
-;; store the last issued token ID
+;; The principal that deploys the contract becomes the owner
+(define-constant CONTRACT-OWNER tx-sender)
+
+;; 0.01 STX = 10,000 micro-STX
+(define-constant MINT-PRICE u10000) 
+
+;; Error Codes
+(define-constant ERR-NOT-AUTHORIZED (err u403))
+(define-constant ERR-STX-TRANSFER (err u101))
+(define-constant ERR-MINT-FAILED (err u102))
+
+;; 2. Data Variables
 (define-data-var last-id uint u0)
 
-;; mint a new NFT
-(define-public (mint-nft)
-  (mint tx-sender)
-)
-
-;; SIP009: Transfer token to a specified principal
-(define-public (transfer (token-id uint) (sender principal) (recipient principal))
-  (begin
-     (asserts! (is-eq tx-sender sender) (err u403))
-     ;; Make sure to replace NFT-FACTORY
-     (nft-transfer? sargesmith-nft token-id sender recipient))
-)
-
-(define-public (transfer-memo (token-id uint) (sender principal) (recipient principal) (memo (buff 34)))
-  (begin 
-    (try! (transfer token-id sender recipient))
-    (print memo)
-    (ok true))
-)
-
-;; SIP009: Get the owner of the specified token ID
-(define-read-only (get-owner (token-id uint))
-  ;; Make sure to replace NFT-NAME
-  (ok (nft-get-owner? sargesmith-nft token-id))
-)
-
-;; SIP009: Get the last token ID
+;; 3. Read-Only Functions
 (define-read-only (get-last-token-id)
-  (ok (var-get last-id))
+    (ok (var-get last-id))
 )
 
-;; SIP009: Get the token URI. You can set it to any other URI
+;; New: Get total minted (Same as last-id in this case)
+(define-read-only (get-total-minted)
+    (ok (var-get last-id))
+)
+
+(define-read-only (get-owner (token-id uint))
+    (ok (nft-get-owner? sargesmith-nft-v2 token-id))
+)
+
 (define-read-only (get-token-uri (token-id uint))
-  (ok (some "https://ipfs.io/ipfs/bafkreiekadhuwanfpql3hly3hklpkr6ftfz73zwevmtnsx6mk7rfnrgru4"))
+    (ok (some "https://ipfs.io/ipfs/bafkreiekadhuwanfpql3hly3hklpkr6ftfz73zwevmtnsx6mk7rfnrgru4"))
 )
 
-;; Internal - Mint new NFT
-(define-private (mint (new-owner principal))
-    (let ((next-id (+ u1 (var-get last-id))))
-      (var-set last-id next-id)
-      ;; You can replace NFT-FACTORY with another name if you'd like
-      (nft-mint? sargesmith-nft next-id new-owner)
+;; 4. Public Functions
+
+;; Mint function with 0.01 STX fee
+(define-public (mint-nft)
+    (let (
+        (current-id (+ (var-get last-id) u1))
+        (minter tx-sender)
+        (contract-address (as-contract tx-sender))
+    )
+        ;; Charge the 0.01 STX fee
+        (asserts! 
+            (is-ok (stx-transfer? MINT-PRICE minter contract-address)) 
+            ERR-STX-TRANSFER
+        )
+
+        ;; Mint the token
+        (try! (nft-mint? sargesmith-nft-v2 current-id minter))
+
+        ;; Update the counter
+        (var-set last-id current-id)
+        
+        (ok current-id)
+    )
+)
+
+;; New: Withdraw STX (Only the Owner can do this)
+(define-public (withdraw-stx)
+    (let (
+        (balance (stx-get-balance (as-contract tx-sender)))
+    )
+        ;; Check if the person calling is the owner
+        (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+        
+        ;; Transfer all STX from contract to owner
+        (as-contract (stx-transfer? balance tx-sender CONTRACT-OWNER))
+    )
+)
+
+;; SIP009 Transfer
+(define-public (transfer (token-id uint) (sender principal) (recipient principal))
+    (begin
+        (asserts! (is-eq tx-sender sender) ERR-NOT-AUTHORIZED)
+        (nft-transfer? sargesmith-nft-v2 token-id sender recipient)
     )
 )
