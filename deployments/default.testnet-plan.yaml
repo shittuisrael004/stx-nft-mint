@@ -22,7 +22,7 @@ plan:
         - contract-publish:
             contract-name: sargesmith-nftv3
             expected-sender: ST267C6MQJHPR7297033Z8VSKTJM7M62V3784NDT5
-            cost: 875729
+            cost: 25530
             path: contracts/nft-factory.clar
             anchor-block-only: true
             clarity-version: 4
