@@ -43,11 +43,10 @@
     (let (
         (current-id (+ (var-get last-id) u1))
         (minter tx-sender)
-        (contract-address (as-contract tx-sender))
     )
         ;; Charge the 0.01 STX fee
         (asserts! 
-            (is-ok (stx-transfer? MINT-PRICE minter contract-address)) 
+            (is-ok (stx-transfer? MINT-PRICE minter current-contract)) 
             ERR-STX-TRANSFER
         )
 
@@ -64,13 +63,13 @@
 ;; New: Withdraw STX (Only the Owner can do this)
 (define-public (withdraw-stx)
     (let (
-        (balance (stx-get-balance (as-contract tx-sender)))
+        (balance (stx-get-balance current-contract))
     )
         ;; Check if the person calling is the owner
         (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
         
         ;; Transfer all STX from contract to owner
-        (as-contract (stx-transfer? balance tx-sender CONTRACT-OWNER))
+        (stx-transfer? balance current-contract CONTRACT-OWNER)
     )
 )
 
