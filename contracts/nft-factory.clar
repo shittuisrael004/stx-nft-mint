@@ -1,7 +1,13 @@
-;; V1 SargeSmith NFT - Mainnet
+;; Title: SargeSmith NFT 
+;; Deployed on Stacks Mainnet
+
+;; implementing SIP-009 nft-trait mainnet
 (impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
 
+;; ----------------------
 ;; 1. Traits & Constants
+;; ----------------------
+
 (define-non-fungible-token sargesmith-nft uint)
 
 ;; The contract owner wallet
@@ -9,15 +15,22 @@
 
 ;; 0.01 STX = 10,000 micro-STX
 (define-constant MINT-PRICE u10000)
+
 ;; Error Codes
 (define-constant ERR-NOT-AUTHORIZED (err u403))
 (define-constant ERR-STX-TRANSFER (err u101))
 (define-constant ERR-MINT-FAILED (err u102))
 
+;; ------------------
 ;; 2. Data Variables
+;; ------------------
+
 (define-data-var last-id uint u0)
 
+;; -----------------------
 ;; 3. Read-Only Functions
+;; -----------------------
+
 (define-read-only (get-last-token-id)
     (ok (var-get last-id))
 )
@@ -35,7 +48,9 @@
     (ok (some "https://ipfs.io/ipfs/bafkreiekadhuwanfpql3hly3hklpkr6ftfz73zwevmtnsx6mk7rfnrgru4"))
 )
 
+;; --------------------
 ;; 4. Public Functions
+;; --------------------
 
 ;; Mint function with 0.01 STX fee
 (define-public (mint-nft)
@@ -60,7 +75,7 @@
 )   
 
 ;; New: Withdraw STX (Only the Owner can do this)
-;; Withdraw function using modern 'as-contract?'
+;; Withdraw function using modern 'current-contract and as-contract?'
 (define-public (withdraw-stx)
     (let (
         ;; 1. Figure out how much we have
@@ -76,7 +91,6 @@
       )
     )
 )
-
 
 ;; SIP009 Transfer
 (define-public (transfer (token-id uint) (sender principal) (recipient principal))
