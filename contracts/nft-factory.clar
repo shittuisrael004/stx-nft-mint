@@ -1,14 +1,16 @@
 ;; V1 SargeSmith NFT - Mainnet
-(impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
+;; (impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
+
+(impl-trait 'ST1NXBK3K5YYMD6FD41MVNP3JS1GABZ8TRVX023PT.nft-trait.nft-trait) ;; edit
 
 ;; 1. Traits & Constants
 (define-non-fungible-token sargesmith-nft uint)
 
 ;; The principal that deploys the contract becomes the owner
-(define-constant CONTRACT-OWNER tx-sender)
+(define-constant CONTRACT-OWNER 'ST267C6MQJHPR7297033Z8VSKTJM7M62V3784NDT5) ;; edit
 
 ;; 0.01 STX = 10,000 micro-STX
-(define-constant MINT-PRICE u10000) 
+(define-constant MINT-PRICE u100000) ;; edit
 
 ;; Error Codes
 (define-constant ERR-NOT-AUTHORIZED (err u403))
