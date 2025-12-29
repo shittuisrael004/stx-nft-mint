@@ -2,7 +2,7 @@
 (impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
 
 ;; 1. Traits & Constants
-(define-non-fungible-token sargesmith-nft-v2 uint)
+(define-non-fungible-token sargesmith-nft uint)
 
 ;; The principal that deploys the contract becomes the owner
 (define-constant CONTRACT-OWNER tx-sender)
@@ -29,7 +29,7 @@
 )
 
 (define-read-only (get-owner (token-id uint))
-    (ok (nft-get-owner? sargesmith-nft-v2 token-id))
+    (ok (nft-get-owner? sargesmith-nft token-id))
 )
 
 (define-read-only (get-token-uri (token-id uint))
@@ -40,26 +40,25 @@
 
 ;; Mint function with 0.01 STX fee
 (define-public (mint-nft)
-    (let (
-        (current-id (+ (var-get last-id) u1))
-        (minter tx-sender)
-        (contract-address (as-contract tx-sender))
+  (let (
+    (current-id (+ (var-get last-id) u1))
+    (minter tx-sender)
+  )
+    ;; Charge the 0.01 STX fee
+    (asserts! 
+      (is-ok (as-contract (stx-transfer? MINT-PRICE minter tx-sender)))
+      ERR-STX-TRANSFER
     )
-        ;; Charge the 0.01 STX fee
-        (asserts! 
-            (is-ok (stx-transfer? MINT-PRICE minter contract-address)) 
-            ERR-STX-TRANSFER
-        )
 
-        ;; Mint the token
-        (try! (nft-mint? sargesmith-nft-v2 current-id minter))
+    ;; Mint the token
+    (try! (nft-mint? sargesmith-nft current-id minter))
 
-        ;; Update the counter
-        (var-set last-id current-id)
-        
-        (ok current-id)
-    )
-)
+    ;; Update the counter
+    (var-set last-id current-id)
+    
+    (ok current-id)
+  )
+)   
 
 ;; New: Withdraw STX (Only the Owner can do this)
 (define-public (withdraw-stx)
@@ -78,6 +77,6 @@
 (define-public (transfer (token-id uint) (sender principal) (recipient principal))
     (begin
         (asserts! (is-eq tx-sender sender) ERR-NOT-AUTHORIZED)
-        (nft-transfer? sargesmith-nft-v2 token-id sender recipient)
+        (nft-transfer? sargesmith-nft token-id sender recipient)
     )
 )
