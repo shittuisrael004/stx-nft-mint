@@ -6,10 +6,7 @@ telemetry = false
 cache_dir = './.cache'
 requirements = []
 
-[contracts.nft-trait]
-path = 'contracts/nft-trait.clar'
-clarity_version = 4
-epoch = 'latest'
+
 
 [contracts.sargesmith-nft]
 path = 'contracts/nft-factory.clar'
