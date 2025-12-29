@@ -40,24 +40,25 @@
 
 ;; Mint function with 0.01 STX fee
 (define-public (mint-nft)
-  (let (
-    (current-id (+ (var-get last-id) u1))
-    (minter tx-sender)
-  )
-    ;; Charge the 0.01 STX fee
-    (asserts! 
-      (is-ok (as-contract (stx-transfer? MINT-PRICE minter tx-sender)))
-      ERR-STX-TRANSFER
+    (let (
+        (current-id (+ (var-get last-id) u1))
+        (minter tx-sender)
+        (contract-address (as-contract tx-sender))
     )
+        ;; Charge the 0.01 STX fee
+        (asserts! 
+            (is-ok (stx-transfer? MINT-PRICE minter contract-address)) 
+            ERR-STX-TRANSFER
+        )
 
-    ;; Mint the token
-    (try! (nft-mint? sargesmith-nft current-id minter))
+        ;; Mint the token
+        (try! (nft-mint? sargesmith-nft current-id minter))
 
-    ;; Update the counter
-    (var-set last-id current-id)
-    
-    (ok current-id)
-  )
+        ;; Update the counter
+        (var-set last-id current-id)
+        
+        (ok current-id)
+    )
 )   
 
 ;; New: Withdraw STX (Only the Owner can do this)
