@@ -7,7 +7,7 @@ cache_dir = './.cache'
 
 [[project.requirements]]
 contract_id = 'ST1NXBK3K5YYMD6FD41MVNP3JS1GABZ8TRVX023PT.nft-trait'
-[contracts.sargesmith-nftv2]
+[contracts.sargesmith-nftv3]
 path = 'contracts/nft-factory.clar'
 clarity_version = 4
 epoch = 'latest'
