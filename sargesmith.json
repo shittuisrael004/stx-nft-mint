@@ -1,9 +1,7 @@
 {
-
-    "name": "sargesmith",
+    "name": "sargesmith NFT",
 
     "description": "This is a collection of sargesmith NFTs.",
 
-    "image": "https://gateway.lighthouse.storage/ipfs/bafkreibqqddaatwpnrzldaplcrl56qtinbnhn5mt7s4qkl7ccdykvmvf44",
-
+    "image": "ipfs://bafkreibqqddaatwpnrzldaplcrl56qtinbnhn5mt7s4qkl7ccdykvmvf44"
 }

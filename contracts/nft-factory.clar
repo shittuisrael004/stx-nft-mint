@@ -44,7 +44,7 @@
 
 ;; SIP009: Get the token URI. You can set it to any other URI
 (define-read-only (get-token-uri (token-id uint))
-  (ok (some "https://ipfs.io/ipfs/bafkreibqqddaatwpnrzldaplcrl56qtinbnhn5mt7s4qkl7ccdykvmvf44"))
+  (ok (some "https://ipfs.io/ipfs/bafkreiekadhuwanfpql3hly3hklpkr6ftfz73zwevmtnsx6mk7rfnrgru4"))
 )
 
 ;; Internal - Mint new NFT
