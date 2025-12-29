@@ -9,10 +9,10 @@ plan:
     - id: 0
       transactions:
         - contract-publish:
-            contract-name: nft-trait
+            contract-name: test-sargesmith-nft
             expected-sender: ST267C6MQJHPR7297033Z8VSKTJM7M62V3784NDT5
-            cost: 4670
-            path: contracts/nft-trait.clar
+            cost: 16510
+            path: contracts/nft-factory.clar
             anchor-block-only: true
             clarity-version: 4
       epoch: "3.3"
