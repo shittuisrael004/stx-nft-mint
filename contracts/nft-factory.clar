@@ -66,14 +66,21 @@
 ;; Withdraw function using modern 'as-contract?'
 (define-public (withdraw-stx)
     (let (
+        ;; 1. Figure out how much we have
         (balance (stx-get-balance current-contract))
     )
-        (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+      ;; 2. Only the owner can call this
+      (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
         
-        ;; as-contract? returns a response, making it safer
-        (as-contract? (stx-transfer? balance current-contract CONTRACT-OWNER))
+      ;; 3. Use as-contract? with ALLOWANCES
+      ;; Syntax: (as-contract? (ALLOWANCE-LIST) BODY)
+      (as-contract? ((with-stx balance)) 
+          (try! (stx-transfer? balance current-contract CONTRACT-OWNER)) 
+      )
     )
 )
+
+
 ;; SIP009 Transfer
 (define-public (transfer (token-id uint) (sender principal) (recipient principal))
     (begin
