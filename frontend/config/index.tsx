@@ -5,7 +5,7 @@ import { mainnet, arbitrum} from "@reown/appkit/networks";
 export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID
 
 if (!projectId) {
-    throw new Error('Project Id id not defined')
+    throw new Error('Project Id is not defined')
 }
 
 export const networks = [mainnet, arbitrum]
@@ -15,8 +15,8 @@ export const wagmiAdapter = new WagmiAdapter({
         storage: cookieStorage
     }),
     ssr: true,
-    networks,
-    projectId
+    projectId,
+    networks    
 })
 
 export const config = wagmiAdapter.wagmiConfig
